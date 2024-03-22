@@ -1,3 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using QuesterMergeConflict;
 
-Console.WriteLine("Hello, World!");
+Package package = new Package();
+package.AddQuestion(new Question("dffd", "fdfd"));
+package.AddQuestion(new Question("dffd", "fdfd2"));
+package.AddQuestion(new Question("dffd", "fdfd1"));
+package.SaveToFileAsync("dss.txt");
