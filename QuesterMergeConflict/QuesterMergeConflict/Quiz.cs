@@ -1,8 +1,62 @@
 ﻿namespace QuesterMergeConflict;
 
+public class Answer
+{
+    public string Text { get; set; }
+    public bool IsCorrect { get; set; }
+}
+
+public class Question
+{
+    public string Text { get; set; }
+    public List<Answer> Answers { get; set; }
+
+    public Question()
+    {
+        Answers = new List<Answer>();
+    }
+
+    public void AddQuestion(string questionValue)
+    {
+        Text = questionValue;
+    }
+
+    public void AddAnswer(string text, bool isCorrect = false)
+    {
+        var answer = new Answer { Text = text, IsCorrect = isCorrect };
+        Answers.Add(answer);
+    }
+
+    public bool CheckAnswer(int selectedAnswer)
+    {
+        if (selectedAnswer >= 0 && selectedAnswer < Answers.Count)
+        {
+            return Answers[selectedAnswer].IsCorrect;
+        }
+        return false;
+    }
+}
+
 public class Quiz
 {
-    
+    public List<Question> Questions { get; set; }
+
+    public Quiz()
+    {
+        Questions = new List<Question>();
+    }
+
+    public void AddQuestionWithAnswers(string questionValue, List<string> answerValue, int correctAnswer)
+    {
+        var question = new Question();
+        question.AddQuestion(questionValue);
+        for (int i = 0; i < answerValue.Count; i++)
+        {
+            bool isCorrect = i == correctAnswer;
+            question.AddAnswer(answerValue[i], isCorrect);
+        }
+        Questions.Add(question);
+    }
 }
 
 public class Question(string condition, string answer)
