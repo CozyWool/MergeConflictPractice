@@ -2,57 +2,22 @@
 
 public class Quiz
 {
-    
-}
+    public List<Question> Questions { get; set; }
 
-public class Question(string condition, string answer)
-{
-    public string Condition { get; set; } = condition;
-    public string Answer { get; set; } = answer;
-}
-
-public class Package
-{
-    private readonly List<Question> _questions;
-
-    public Package(List<Question> questions, string name)
+    public Quiz()
     {
-        _questions = questions;
-        Name = name;
+        Questions = new List<Question>();
     }
 
-    public Package(string name) : this([], name)
+    public void AddQuestionWithAnswers(string questionValue, List<string> answerValue, int correctAnswer)
     {
-    }
-
-    public string Name { get; set; }
-
-    public void AddQuestion(Question question)
-    {
-        _questions.Add(question);
-    }
-    public void DeleteQuestion(Question question)
-    {
-        _questions.Remove(question);
-    }
-
-    public void UpdateQuestion(Question question)
-    {
-        var index = _questions.IndexOf(question);
-        if (index == -1) return;
-
-        _questions[index] = question;
-    }
-
-    public Question? GetQuestion(Question question)
-    {
-        return _questions.FirstOrDefault(q => question.Answer == q.Answer && question.Condition == q.Condition);
-    }
-    
-    public Question? GetQuestion(int index)
-    {
-        if (index < 0 || index >= _questions.Count) return null;
-        
-        return _questions[index];
+        var question = new Question();
+        question.AddQuestion(questionValue);
+        for (int i = 0; i < answerValue.Count; i++)
+        {
+            bool isCorrect = i == correctAnswer;
+            question.AddAnswer(answerValue[i], isCorrect);
+        }
+        Questions.Add(question);
     }
 }
