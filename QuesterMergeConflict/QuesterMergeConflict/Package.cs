@@ -13,6 +13,9 @@ public class Package
     public Package(string name) : this([], name)
     {
     }
+    public Package() : this([], "")
+    {
+    }
 
     public string Name { get; set; }
 
