@@ -25,14 +25,4 @@ public class Program
             Console.Write("Введите номер вашего ответа ");
             int answer = int.Parse(Console.ReadLine()) - 1;
 
-            if (question.CheckAnswer(answer))
-            {
-                Console.WriteLine("Правильно!");
-            }
-            else
-            {
-                Console.WriteLine("Неправильно!");
-            }
-        }
-    }
-}
+Console.WriteLine("Hello, World!");
