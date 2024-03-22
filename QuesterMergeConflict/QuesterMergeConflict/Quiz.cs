@@ -8,6 +8,9 @@ public class Quiz
 
     public Quiz(string name, Package package)
     {
+        Name = name;
+        Package = package;
+    }
 
     public void AddQuestionWithAnswers(string questionValue, List<string> answerValue, int correctAnswer)
     {
@@ -18,10 +21,7 @@ public class Quiz
             bool isCorrect = i == correctAnswer;
             question.AddAnswer(answerValue[i], isCorrect);
         }
-        Questions.Add(question);
-    }
-        Name = name;
-        Package = package;
+        Package.AddQuestion(question);
     }
 
     public void StartQuiz()
@@ -35,7 +35,7 @@ public class Quiz
 
     public bool CheckAnswer(string answer, int index)
     {
-        if (answer==Package.GetQuestion(index).AnswerText) return true;
+        if (answer == Package.GetQuestion(index).Answers[0].Text) return true;
         return false;
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Xml;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 namespace QuesterMergeConflict;
 
 public class Package
@@ -37,30 +35,30 @@ public class Package
     }
 
 
-        public Question GetQuestion(int index)
-        {
-            return questions[index];
-        }
+    public Question GetQuestion(int index)
+    {
+        return _questions[index];
+    }
 
-        public int GetCountQuestions()
-        {
-            return questions.Count;
-		}
+    public int GetCountQuestions()
+    {
+        return _questions.Count;
+    }
+
     public Question? GetQuestion(Question question)
     {
         return _questions.FirstOrDefault(q => question.Answers == q.Answers && question.Text == q.Text);
     }
-        }
 
-        public async void SaveToFileAsync(string filePath)
+    public async void SaveToFileAsync(string filePath)
+    {
+        using (FileStream stream = new FileStream(filePath, FileMode.Create))
         {
-            using (FileStream stream = new FileStream(filePath, FileMode.Create))
+            for (int i = 0; i < _questions.Count; i++)
             {
-                for(int i=0;i<questions.Count;i++)
-                {
-                    byte[] buffer = Encoding.Default.GetBytes(questions[i].ToString()+"\n");
-                    await stream.WriteAsync(buffer, 0, buffer.Length);
-                }
+                byte[] buffer = Encoding.Default.GetBytes(_questions[i].ToString() + "\n");
+                await stream.WriteAsync(buffer, 0, buffer.Length);
             }
         }
     }
+}
