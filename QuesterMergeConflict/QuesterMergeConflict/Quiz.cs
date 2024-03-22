@@ -2,13 +2,17 @@
 
 public class Quiz
 {
-    public List<Question> Questions { get; set; }
+    private Package Package { get; set; }
 
-    public Quiz()
+    public Quiz(Package package)
     {
-        Questions = new List<Question>();
+        Package = package;
     }
 
+    public Quiz() : this(new())
+    {
+        
+    }
     public void AddQuestionWithAnswers(string questionValue, List<string> answerValue, int correctAnswer)
     {
         var question = new Question();
@@ -18,6 +22,10 @@ public class Quiz
             bool isCorrect = i == correctAnswer;
             question.AddAnswer(answerValue[i], isCorrect);
         }
-        Questions.Add(question);
+        Package.AddQuestion(question);
+    }
+    public void AddQuestion(Question question)
+    {
+        Package.AddQuestion(question);
     }
 }
